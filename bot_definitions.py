@@ -6,6 +6,7 @@ from bot_runner_helpers import (
     create_call_transfer_settings,
     create_simple_dialin_settings,
     create_simple_dialout_settings,
+    create_enhanced_dialin_settings,
 )
 
 # Create and configure the bot registry
@@ -17,7 +18,7 @@ bot_registry.register(
         name="call_transfer",
         settings_creator=create_call_transfer_settings,
         required_settings=["dialin_settings"],
-        incompatible_with=["simple_dialin", "simple_dialout", "voicemail_detection"],
+        incompatible_with=["simple_dialin", "simple_dialout", "voicemail_detection", "enhanced_dialin"],
         auto_add_settings={"dialin_settings": {}},
     )
 )
@@ -27,7 +28,7 @@ bot_registry.register(
         name="simple_dialin",
         settings_creator=create_simple_dialin_settings,
         required_settings=["dialin_settings"],
-        incompatible_with=["call_transfer", "simple_dialout", "voicemail_detection"],
+        incompatible_with=["call_transfer", "simple_dialout", "voicemail_detection", "enhanced_dialin"],
         auto_add_settings={"dialin_settings": {}},
     )
 )
@@ -37,7 +38,7 @@ bot_registry.register(
         name="simple_dialout",
         settings_creator=create_simple_dialout_settings,
         required_settings=["dialout_settings"],
-        incompatible_with=["call_transfer", "simple_dialin", "voicemail_detection"],
+        incompatible_with=["call_transfer", "simple_dialin", "voicemail_detection", "enhanced_dialin"],
         auto_add_settings={"dialout_settings": [{}]},
     )
 )
@@ -49,7 +50,17 @@ bot_registry.register(
             "voicemail_detection", {}
         ),  # No creator function in original code
         required_settings=["dialout_settings"],
-        incompatible_with=["call_transfer", "simple_dialin", "simple_dialout"],
+        incompatible_with=["call_transfer", "simple_dialin", "simple_dialout", "enhanced_dialin"],
         auto_add_settings={"dialout_settings": [{}]},
+    )
+)
+
+bot_registry.register(
+    BotType(
+        name="enhanced_dialin",
+        settings_creator=create_enhanced_dialin_settings,
+        required_settings=["dialin_settings"],
+        incompatible_with=["call_transfer", "simple_dialin", "simple_dialout", "voicemail_detection"],
+        auto_add_settings={"dialin_settings": {}},
     )
 )

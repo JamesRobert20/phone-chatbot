@@ -151,6 +151,32 @@ def create_simple_dialin_settings(body: Dict[str, Any]) -> Dict[str, Any]:
     return simple_dialin_settings
 
 
+def create_enhanced_dialin_settings(body: Dict[str, Any]) -> Dict[str, Any]:
+    """Create enhanced dialin settings based on configuration.
+
+    Args:
+        body: The configuration dictionary
+
+    Returns:
+        Enhanced dialin settings dictionary
+    """
+    # Default enhanced dialin settings
+    enhanced_dialin_settings = {
+        "testInPrebuilt": DEFAULT_TEST_IN_PREBUILT,
+        "silenceThresholdSeconds": 10, 
+        "maxUnansweredPrompts": 3
+    }
+
+    # If enhanced_dialin already exists, merge the defaults with the existing settings
+    if "enhanced_dialin" in body:
+        existing_settings = body["enhanced_dialin"]
+        # Update defaults with existing settings (existing values will override defaults)
+        for key, value in existing_settings.items():
+            enhanced_dialin_settings[key] = value
+
+    return enhanced_dialin_settings
+
+
 def create_simple_dialout_settings(body: Dict[str, Any]) -> Dict[str, Any]:
     """Create simple dialout settings based on configuration.
 
@@ -207,5 +233,8 @@ async def process_dialin_request(data: Dict[str, Any]) -> Dict[str, Any]:
     elif example == "simple_dialin":
         # Create simple dialin settings
         body["simple_dialin"] = create_simple_dialin_settings(body)
+    elif example == "enhanced_dialin":
+        # Create enhanced dialin settings
+        body["enhanced_dialin"] = create_enhanced_dialin_settings(body)
 
     return body
