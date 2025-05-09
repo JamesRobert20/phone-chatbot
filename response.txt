@@ -1,0 +1,14 @@
+Hi Aidan,
+
+Here is my devpost profile for some hackathons I've completed:
+https://devpost.com/JamesRobert20?ref_content=user-portfolio&ref_feature=portfolio&ref_medium=global-nav
+
+Some quick projects I completed include:
+- Keawebsite (A quick proof of concept for a crop startup): https://github.com/JamesRobert20/keawebsite
+
+- tcac-website (Another proof of concept for a community association in calgary): https://github.com/JamesRobert20/tcac-website
+
+- memory-match (This was a game built for a final project of a course that was intended to get students familiar and working with multiple AI tools): https://github.com/JamesRobert20/memory-match
+
+
+
